@@ -1,0 +1,24 @@
+from numpy import * 
+from scipy.linalg import expm
+import matplotlib.pyplot as plt
+
+t = arange(0, 10.01, .01)
+Q = array([[-12,12],[3,-3]])
+y1 = zeros(len(t))
+y2 = zeros(len(t))
+y3 = zeros(len(t))
+y4 = zeros(len(t))
+
+for i in range(0,len(t)):
+    P = expm(Q*t[i]);
+    y1[i] = P[0,0]
+    y2[i] = P[0,1]
+    y3[i] = P[1,0]
+    y4[i] = P[1,1]
+    
+plt.log(t, y1,'b',t,y2,'b',t,y3,'r',t,y4,'r')
+plt.xlabel("Time")
+plt.ylabel("P(t)")
+plt.grid(color='gray', linestyle='--', linewidth=.5)
+plt.show()
+#plt.savefig("plotPython.jpg")
